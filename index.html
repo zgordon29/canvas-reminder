@@ -123,53 +123,9 @@
   </footer>
 
   <script>
-    const API = "https://rri54forh2.execute-api.us-east-2.amazonaws.com/signup";
-
-    function normalizePhone(raw) {
-      const digits = raw.replace(/\D/g, "");
-      if (digits.length === 10) return "+1" + digits;
-      if (digits.length === 11 && digits[0] === "1") return "+" + digits;
-      return null;
-    }
-
-    document.getElementById("signup-form").addEventListener("submit", async (e) => {
+    document.getElementById("signup-form").addEventListener("submit", (e) => {
       e.preventDefault();
-      const btn = document.getElementById("submit-btn");
-      const msg = document.getElementById("msg");
-
-      const phone = normalizePhone(document.getElementById("phone").value);
-      const canvas_url = document.getElementById("canvas-url").value.trim();
-
-      if (!phone) {
-        msg.className = "message error";
-        msg.textContent = "Please enter a valid 10-digit US phone number.";
-        msg.style.display = "block";
-        return;
-      }
-
-      btn.disabled = true;
-      btn.textContent = "Signing up...";
-      msg.style.display = "none";
-
-      try {
-        const res = await fetch(API, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ phone, canvas_url })
-        });
-        const data = await res.json();
-        msg.className = res.ok ? "message success" : "message error";
-        msg.textContent = data.message;
-        msg.style.display = "block";
-        if (res.ok) document.getElementById("signup-form").reset();
-      } catch {
-        msg.className = "message error";
-        msg.textContent = "Network error. Please try again.";
-        msg.style.display = "block";
-      }
-
-      btn.disabled = false;
-      btn.textContent = "Sign me up";
+      window.location.href = "https://duezly.com";
     });
   </script>
 
